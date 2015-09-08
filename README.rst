@@ -5,8 +5,8 @@ Thumbnails for Django.
 Features at a glance
 ====================
 
-- Support for Django 1.4, 1.5 and 1.6
-- Python 3 support (for Django 1.5 and Django 1.6)
+- Support for Django 1.4, 1.5, 1.6, 1.7 and 1.8
+- Python 3 support (for Django 1.5, 1.6, 1.7, 1.8)
 - Storage support
 - Pluggable Engine support for `Pillow`_, `ImageMagick`_, `PIL`_, `Wand`_ and `pgmagick`_
 - Pluggable Key Value Store support (cached db, redis)
@@ -25,18 +25,32 @@ Read more in `the documentation (latest version) <http://sorl-thumbnail.rtfd.org
 Developers
 ==========
 
-Feel free to create a new Pull request if you want to propose a new feature. If you need development support
-or want to discuss with other developers join us in the channel #sorl-thumnbnail at freenode.net or Gitter.
+Feel free to create a new Pull request if you want to propose a new feature.
+If you need development support or want to discuss with other developers
+join us in the channel #sorl-thumnbnail at freenode.net or Gitter.
+
+For releases updates and more in deep development discussion use our mailing list
+in Google Groups.
 
 - IRC Channel: irc://irc.freenode.net/#sorl-thumbnail
-   
+
 - Gitter: https://gitter.im/mariocesar/sorl-thumbnail
 
-Support
-=======
+- Mailing List: sorl-thumbnail@googlegroups.com https://groups.google.com/d/forum/sorl-thumbnail
+
+Tests
+-----
+The tests should run with tox and pytest. Running `tox` will run all tests for all environments.
+However, it is possible to run a certain environment with `tox -e <env>`, a list of all environments
+can be found with `tox -l`. These tests require the dependencies of the different engines defined in
+the documentation. It is possible to install these dependencies into a vagrant image with the
+Vagrantfile in the repo.
+
+User Support
+============
 
 If you need help using sorl-thumbnail browse http://stackoverflow.com/questions/tagged/sorl-thumbnail
-or posts your questions with the `sorl-thumbnail` tag.
+and posts your questions with the `sorl-thumbnail` tag.
 
 
 How to Use
@@ -69,7 +83,7 @@ your project's settings. ::
 
 
 Templates Usage
-----------------
+---------------
 
 All of the examples assume that you first load the thumbnail template tag in
 your template.::
@@ -112,6 +126,22 @@ You can use the 'get_thumbnail'::
 
 See more examples in the section `Low level API examples`_ in the Documentation
 
+--------------------------
+Frequently asked questions
+--------------------------
+
+Is so slow in Amazon S3 !
+-------------------------
+
+Posible related to the implementation of your Amazon S3 Backend, see the issue `#351`_
+due the storage backend reviews if there is an existing thumbnail when tries to
+generate the thumbnail that makes an extensive use of the S3 API
+
+A fast workaround if you are not willing to tweak your storage backend is to set
+the `THUMBNAIL_FORCE_OVERWRITE` setting to `True` by default is `False`, so it will
+avoid to overly query the S3 API
+
+
 
 
 .. |travis| image:: https://secure.travis-ci.org/mariocesar/sorl-thumbnail.png?branch=master
@@ -120,7 +150,6 @@ See more examples in the section `Low level API examples`_ in the Documentation
     :target: http://badge.fury.io/py/sorl-thumbnail
 .. |coveralls| image:: https://coveralls.io/repos/mariocesar/sorl-thumbnail/badge.png?branch=master
     :target: https://coveralls.io/r/mariocesar/sorl-thumbnail?branch=master
-
 
 .. _`Pillow`: http://pillow.readthedocs.org/en/latest/
 .. _`ImageMagick`: http://www.imagemagick.org/script/index.php
@@ -131,3 +160,4 @@ See more examples in the section `Low level API examples`_ in the Documentation
 .. _`Template examples`: http://sorl-thumbnail.readthedocs.org/en/latest/examples.html#template-examples
 .. _`Model examples`: http://sorl-thumbnail.readthedocs.org/en/latest/examples.html#model-examples
 .. _`Low level API examples`: http://sorl-thumbnail.readthedocs.org/en/latest/examples.html#low-level-api-examples
+.. _ `#351`: https://github.com/mariocesar/sorl-thumbnail/issues/351

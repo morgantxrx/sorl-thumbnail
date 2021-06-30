@@ -56,7 +56,6 @@ try:
 except ImportError:
     from django.utils.datastructures import SortedDict as OrderedDict
 
-
 # -- Python 2 and 3
 
 if PY3:
@@ -85,29 +84,6 @@ if PY3:
 
     def urlsplit(url):
         return urlparse.urlsplit(url.decode('ascii', 'ignore'))
-
-elif PY2:
-    from urllib2 import URLError, Request
-    from urllib2 import urlopen as _urlopen
-    from urllib import quote, quote_plus
-
-    import urlparse
-
-    from cStringIO import StringIO as BufferIO
-
-    text_type = unicode
-    string_type = basestring
-    urlsplit = urlparse.urlsplit
-
-
-    def b(s):
-        return s
-
-
-    def encode(value, charset='utf-8', errors='ignore'):
-        if isinstance(value, unicode):
-            return value.encode(charset, errors)
-        return unicode(value, errors=errors).encode(charset)
 
 
 # -- Urlopen with a proper default user agent

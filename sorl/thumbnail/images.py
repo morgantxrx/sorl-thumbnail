@@ -3,7 +3,7 @@
 from __future__ import unicode_literals, division
 import os
 import re
-import urllib2
+# import urllib
 import random
 
 from django.core.files.base import File, ContentFile
